@@ -4,6 +4,8 @@ Country Search is a web app that allows a user to select any country followed by
 
 This project was generated using `npm create svelte@latest`
 
+You can visit the project live at [https://country-state-search.vercel.app](https://country-state-search.vercel.app)
+
 ## Stack
 
 - sveltekit
