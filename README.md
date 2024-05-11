@@ -1,38 +1,57 @@
-# create-svelte
+# Country Search
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Country Search is a web app that allows a user to select any country followed by selecting a state/province in the selected country. A user can navigate to a page when clicking on the Province card that shows up.
 
-## Creating a project
+This project was generated using `npm create svelte@latest`
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Stack
+
+- sveltekit
+- svelte-query
+- tailwindcss
+- typescript
+- vitest
+- playwright
+
+## Features
+
+- File based routing
+- File based API routing
+- Server API call
+- Environment variables
+- Svelte Stores
+- Svelte Query
+- Loading Page/Layout Data
+- Layouts
+- Tests with vitest and playwright
+
+## How to run
+
+1. Add environment variables
+
+Add the url endpoint and api key in a `.env` in the project directory root. See `.env.example` on how to name the environment variables.
+
+2. Install dependencies
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+npm i
+pnpm i
+yarn i
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+3. Run the project
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm dev
+yarn dev
 ```
 
-## Building
 
-To create a production version of your app:
+4. Run the tests
 
 ```bash
-npm run build
+npm run test
+pnpm test
+yarn test
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
