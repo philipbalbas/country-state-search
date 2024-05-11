@@ -16,7 +16,7 @@ describe('API methods', () => {
 		});
 
 		const result = await api(mockFetch).getCountries({ url: URL, apiKey: API_KEY });
-		expect(result).toEqual(mockCountries);
+		expect(result.data).toEqual(mockCountries);
 		expect(mockFetch).toHaveBeenCalledWith(URL, {
 			headers: { 'x-api-key': API_KEY }
 		});
@@ -29,7 +29,7 @@ describe('API methods', () => {
 		});
 
 		const result = await api(mockFetch).getCountries({ url: URL, apiKey: API_KEY });
-		expect(result).toEqual([]);
+		expect(result.data).toEqual([]);
 		expect(mockFetch).toHaveBeenCalled();
 	});
 
@@ -42,7 +42,7 @@ describe('API methods', () => {
 		});
 
 		const result = await api(mockFetch).getStates(1, { url: URL, apiKey: API_KEY });
-		expect(result).toEqual(mockStates);
+		expect(result.data).toEqual(mockStates);
 		expect(mockFetch).toHaveBeenCalledWith(`${URL}/1/states`, {
 			headers: { 'x-api-key': API_KEY }
 		});
@@ -55,7 +55,7 @@ describe('API methods', () => {
 		});
 
 		const result = await api(mockFetch).getStates(1, { url: URL, apiKey: API_KEY });
-		expect(result).toEqual([]);
+		expect(result.data).toEqual([]);
 		expect(mockFetch).toHaveBeenCalled();
 	});
 });
