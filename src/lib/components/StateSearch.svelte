@@ -5,25 +5,51 @@
 	import { selectedCountryId, selectedState } from '$lib/store';
 	import type { State } from '$lib/types';
 
-	$: states = createQuery(
+	const states = createQuery(
 		derived(selectedCountryId, ($selectedCountryId) => ({
 			queryKey: ['states', $selectedCountryId],
-			queryFn: async () =>
-				await fetch(`/api/countries/${$selectedCountryId}`).then((res) => res.json())
+			queryFn: async () => {
+				if (!$selectedCountryId) {
+					return [];
+				}
+
+				try {
+					const response = await fetch(`/api/countries/${$selectedCountryId}`);
+
+					if (!response.ok) {
+						const errorText = await response.text();
+						throw new Error(`API error: ${response.status} - ${errorText}`);
+					}
+
+					return await response.json();
+				} catch (error: any) {
+					const errorMessage = `Failed to fetch states'}`;
+					throw new Error(error.message || errorMessage);
+				}
+			}
 		}))
 	);
 
-	$: items = $states.data?.map((state: State) => ({
-		value: state.id,
-		label: state.value
-	}));
+	$: items =
+		(!$states.error &&
+			$states.data?.map((state: State) => ({
+				value: state.id,
+				label: state.value
+			}))) ||
+		[];
 </script>
 
-<Select
-	{items}
-	disabled={!$selectedCountryId}
-	bind:value={$selectedState}
-	placeholder="Select a state"
-	class="w-full"
-	id="state"
-/>
+{#if $states.error}
+	<div class="text-red-500">
+		<p>{$states.error.message}</p>
+	</div>
+{:else}
+	<Select
+		{items}
+		disabled={!$selectedCountryId}
+		bind:value={$selectedState}
+		placeholder="Select a state"
+		class="w-full"
+		id="state"
+	/>
+{/if}
